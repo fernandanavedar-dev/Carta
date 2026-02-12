@@ -1,0 +1,185 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Alejandro ❤️</title>
+
+<style>
+body{
+ margin:0;
+ background:black;
+ color:white;
+ font-family:'Segoe UI',sans-serif;
+ overflow:auto;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ height:100vh;
+}
+
+/* pantalla inicial */
+#intro{
+ position:absolute;
+ text-align:center;
+ font-size:40px;
+ animation:fadein 2s;
+}
+
+@keyframes fadein{
+ from{opacity:0;}
+ to{opacity:1;}
+}
+
+/* carta */
+#carta{
+ display:none;
+ background:white;
+ color:#444;
+ padding:25px;
+ border-radius:20px;
+ width:350px;
+ text-align:center;
+ box-shadow:0 0 50px rgba(255,0,100,.6);
+ animation:aparecer 2s ease;
+}
+
+@keyframes aparecer{
+ from{opacity:0; transform:scale(.6);}
+ to{opacity:1; transform:scale(1);}
+}
+
+img{
+ width:100%;
+ border-radius:15px;
+ margin:15px 0;
+ box-shadow:0 0 30px rgba(255,0,100,.6);
+}
+
+h1{color:#ff2e63;}
+
+button{
+ background:#ff2e63;
+ border:none;
+ padding:12px 25px;
+ border-radius:30px;
+ color:white;
+ font-size:16px;
+ cursor:pointer;
+}
+
+#mensaje{
+ display:none;
+ margin-top:15px;
+ font-weight:bold;
+ color:#ff2e63;
+}
+
+/* estrellas */
+.star{
+ position:absolute;
+ width:3px;
+ height:3px;
+ background:white;
+ border-radius:50%;
+ animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+ from{opacity:.2;}
+ to{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+<span id="count">3</span>
+</div>
+
+<div id="carta">
+<h1>Para Alejandro ❤️</h1>
+
+<!-- IMPORTANTE: nombre EXACTO del archivo -->
+<img src="WhatsApp Image 2026-02-11 at 5.11.30 PM (1).jpeg">
+
+<p>
+Mi amor,<br><br>
+Desde que llegaste a mi vida todo cambió.  
+Eres mi paz, mi felicidad y mi lugar favorito.  
+Gracias por existir y por elegirme cada día.
+</p>
+
+<div id="contador"></div>
+
+<button onclick="abrir()">Abrir mensaje 💌</button>
+
+<div id="mensaje">
+Te amo infinitamente 💕 — Fernanda
+</div>
+
+<br><br>
+<button onclick="toggleMusic()">🎵 Música</button>
+
+<audio id="song" loop>
+<source src="Billie Eilish - BIRDS OF A FEATHER (Official Music Video)(mp3j.cc).mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+/* cuenta regresiva */
+let n=3;
+let intervalo=setInterval(()=>{
+ n--;
+ document.getElementById("count").innerHTML=n;
+ if(n==0){
+  clearInterval(intervalo);
+  document.getElementById("intro").style.display="none";
+  document.getElementById("carta").style.display="block";
+  estrellas();
+ }
+},1000);
+
+/* estrellas */
+function estrellas(){
+ for(let i=0;i<80;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDuration=(Math.random()*2+1)+"s";
+  document.body.appendChild(s);
+ }
+}
+
+/* mensaje */
+function abrir(){
+ document.getElementById("mensaje").style.display="block";
+}
+
+/* contador */
+const inicio=new Date("May 20, 2024 00:00:00").getTime();
+setInterval(()=>{
+ const ahora=new Date().getTime();
+ const dif=ahora-inicio;
+ const d=Math.floor(dif/(1000*60*60*24));
+ const h=Math.floor((dif%(1000*60*60*24))/(1000*60*60));
+ const m=Math.floor((dif%(1000*60*60))/(1000*60));
+ document.getElementById("contador").innerHTML=
+ "Llevamos juntos 💕 "+d+" días, "+h+" horas y "+m+" minutos ❤️";
+},1000);
+
+/* musica play pause */
+const audio = document.getElementById("song");
+
+function toggleMusic(){
+    if(audio.paused){
+        audio.play();
+    }else{
+        audio.pause();
+    }
+}
+</script>
+
+</body>
+</html>
